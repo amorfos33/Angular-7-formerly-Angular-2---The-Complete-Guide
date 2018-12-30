@@ -10,4 +10,5 @@ export class AppComponent {
   oddNumbers =[2,4];
   evenNumbers=[1,3,5];
   onlyOdd = false;
+  value=5;
 }
