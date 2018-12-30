@@ -12,6 +12,7 @@ import { RecipesItemComponent } from './recipes/recipes-list/recipes-item/recipe
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { from } from 'rxjs';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { from } from 'rxjs';
     RecipesItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
+    DropdownDirective,
     
   ],
   imports: [
