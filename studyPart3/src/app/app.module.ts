@@ -27,11 +27,11 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     ShoppingListComponent,
     ShoppingEditComponent,
     DropdownDirective,
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+   
     FormsModule
   ],
   providers: [ShoppingListService],
