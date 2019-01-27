@@ -4,15 +4,20 @@ import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
 // tslint:disable-next-line:import-blacklist
 import 'rxjs/Rx';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DataStoregeService {
-    constructor(private http: Http, private recipeService: RecipeService) {}
+    constructor(private http: Http,
+                private recipeService: RecipeService,
+                private authService: AuthService) {}
     storeRecipes() {
-        return this.http.put('https://ng-recipe-book-e8d2e.firebaseio.com/recipe.json', this.recipeService.getRecipes());
+        const token = this.authService.getToken();
+        return this.http.put('https://ng-recipe-book-e8d2e.firebaseio.com/recipe.json?auth=' + token, this.recipeService.getRecipes());
     }
     getRecipe() {
-        return this.http.get('https://ng-recipe-book-e8d2e.firebaseio.com/recipe.json')
+        const token = this.authService.getToken();
+        return this.http.get('https://ng-recipe-book-e8d2e.firebaseio.com/recipe.json?auth=' + token)
         .map(
             (response: Response) => {
                 const recipes: Recipe[] = response.json();
