@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 // tslint:disable-next-line:import-blacklist
 import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import { AuthService } from '../auth/auth.service';
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
   constructor(private httpClient: HttpClient,
-              private recipeService: RecipeService,
-              private authService: AuthService) {
+              private recipeService: RecipeService) {
   }
 
   storeRecipes() {
@@ -36,21 +35,20 @@ export class DataStorageService {
         })
         .map(
             (recipes) => {
-                console.log(recipes);
-                // tslint:disable-next-line:prefer-const
-                for (let recipe of recipes) {
-                    if (!recipe['ingredients']) {
-                        console.log(recipe);
-                        recipe['ingredients'] = [];
-                    }
+              console.log(recipes);
+              // tslint:disable-next-line:prefer-const
+              for (let recipe of recipes) {
+                if (!recipe['ingredients']) {
+                  recipe['ingredients'] = [];
                 }
-                return recipes;
+              }
+              return recipes;
             }
-        )
-        .subscribe(
+          )
+          .subscribe(
             (recipes: Recipe[]) => {
-                this.recipeService.setRecipes(recipes);
+              this.recipeService.setRecipes(recipes);
             }
-        );
+          );
     }
 }
