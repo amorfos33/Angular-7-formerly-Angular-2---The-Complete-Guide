@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import * as AuthActions from './auth.actions';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import 'rxjs/operators/map';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { Router } from '@angular/router';

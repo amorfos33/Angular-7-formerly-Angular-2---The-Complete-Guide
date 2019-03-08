@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataStorageService } from '../../shared/data-storage.service';
 import { Store } from '@ngrx/store';
 // import { HttpEvent, HttpEventType } from '@angular/common/http';
 import * as fromApp from '../../store/app.reducers';
@@ -16,20 +15,14 @@ import * as RecipeActions from '../../recipes/store/recipe.actions';
 export class HeaderComponent implements OnInit {
   authState: Observable<fromAuth.State>;
 
-  constructor(private dataStorageService: DataStorageService,
-              private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.authState = this.store.select('auth');
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes()
-      .subscribe(
-        (response) => {
-          console.log(response);
-        }
-      );
+    this.store.dispatch(new RecipeActions.StoreRecipes);
   }
 
   onFetchData() {
